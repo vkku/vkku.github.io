@@ -1,11 +1,11 @@
 ---
-title: Leetcode 739 - Daily Temperatures
+title: Leetcode 739
 date: 2025-04-20 10:25:00 +0530
 categories: [leetcode, stack]
 tags: [leetcode]
 ---
 
-# Leetcode 739 - Daily Temperatures
+# Daily Temperatures
 
 ## Intuition
 1. Need to find next maximum
@@ -23,4 +23,26 @@ tags: [leetcode]
 
 ## Code
 
-<iframe src="https://github.com/vkku/LeetCode/blob/b4d5da6fce0d696b5328a8f00eb01aafe6718b44/src/main/java/me/vkku/stack/Daily_Temperature_739.java" width="100%" height="500px" style="border:none;"></iframe>
+```dtd
+public class Daily_Temperature_739 {
+    public int[] dailyTemperatures(int[] temperatures) {
+    Stack<List<Integer>> temperatureIndexedStack = new Stack<>();
+    int[] result =  new int[temperatures.length];
+    for(int i = 0 ; i < temperatures.length ; i++){
+    while(!temperatureIndexedStack.isEmpty() && temperatures[i] > temperatureIndexedStack.peek().get(0)){
+    var element = temperatureIndexedStack.pop();
+    Integer index = element.get(1);
+    result[index] = i - index;
+    }
+    temperatureIndexedStack.add(List.of(temperatures[i], i));
+    }
+    return result;
+    }
+  
+    @Test
+    public void driver() {
+    Daily_Temperature_739_Revision dt = new Daily_Temperature_739_Revision();
+    System.out.println(Arrays.toString(dt.dailyTemperatures(new int[]{73, 74, 75, 71, 69, 72, 76, 73})));   //[1, 1, 4, 2, 1, 1, 0, 0]
+    }
+  }
+```
