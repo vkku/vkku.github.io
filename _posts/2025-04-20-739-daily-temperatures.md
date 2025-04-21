@@ -20,6 +20,7 @@ tags: [leetcode]
 
 ## _Notes_
 1. New element in consideration, via loop increment will pop all the elements less than it, then it'll make it's entry into the stack(while loop)
+2. Larger kills smaller
 
 ## Code
 
